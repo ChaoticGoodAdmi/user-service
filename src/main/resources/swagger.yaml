@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: User Service API
+  description: API для управления пользователями (регистрация, аутентификация, получение информации)
+  version: 1.0.0
+servers:
+  - url: http://localhost:8081
+    description: Local server
+paths:
+  /users/register:
+    post:
+      summary: Регистрация пользователя
+      description: Регистрирует нового пользователя в системе
+      requestBody:
+        description: Данные нового пользователя
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: johndoe
+                password:
+                  type: string
+                  example: secretpassword
+                email:
+                  type: string
+                  example: johndoe@example.com
+      responses:
+        '201':
+          description: Пользователь успешно зарегистрирован
+        '400':
+          description: Неверные данные запроса
+  /users/login:
+    post:
+      summary: Аутентификация пользователя
+      description: Аутентифицирует пользователя и возвращает JWT токен
+      requestBody:
+        description: Данные для аутентификации пользователя
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: johndoe
+                password:
+                  type: string
+                  example: secretpassword
+      responses:
+        '200':
+          description: Пользователь успешно аутентифицирован
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        '401':
+          description: Неверные учетные данные
+  /users/{id}:
+    get:
+      summary: Получение информации о пользователе
+      description: Возвращает информацию о пользователе по его ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 60c72b2f5f1b2c001c8e4d9f
+      responses:
+        '200':
+          description: Информация о пользователе
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 60c72b2f5f1b2c001c8e4d9f
+                  username:
+                    type: string
+                    example: johndoe
+                  email:
+                    type: string
+                    example: johndoe@example.com
+        '404':
+          description: Пользователь не найден
