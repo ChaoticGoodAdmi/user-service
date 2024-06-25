@@ -26,9 +26,23 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-tomcat")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.litote.kmongo:kmongo:4.3.0")
+    implementation("org.springframework.security:spring-security-config")
+    implementation("org.springframework.security.oauth:spring-security-oauth2:2.3.4.RELEASE")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
+    implementation("javax.servlet:javax.servlet-api:4.0.1")
+    implementation("io.jsonwebtoken:jjwt-api:0.12.6")
+    implementation("io.jsonwebtoken:jjwt-impl:0.12.6")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.12.6")
+    implementation("org.glassfish.jaxb:jaxb-runtime:2.3.2") {
+        exclude(group = "javax.xml.bind", module = "jaxb-api")
+    }
+    implementation("jakarta.xml.bind:jakarta.xml.bind-api:2.3.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
